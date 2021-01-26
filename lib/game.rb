@@ -10,6 +10,15 @@ class Game
     @human_player = HumanPlayer.new(player)
     @enemies = [Player.new("Basil"), Player.new("Youssef"), Player.new("Yann"), Player.new("Théo"), Player.new("Mehdi"), Player.new("Charles")]
   end
+
+  def show_players
+    @human_player.show_state
+    i = 0
+    while i < @enemies.length
+      @enemies[i].show_state
+      i += 1
+    end
+  end
   
   def kill_player
     i = 0
@@ -22,16 +31,7 @@ class Game
   end
 
   def is_still_ongoing?
-    if @human_player.life_points > 0 && !@enemies.empty?
-      return true
-    else
-      return false
-    end
-  end
-
-  def show_players
-    @human_player.show_state
-    puts "Nombre d'ennemis en vie: #{@enemies.count}"
+    @human_player.life_points > 0 && !@enemies.empty? ? true : false
   end
 
   #------ Print Menu + state of enemy ------#
@@ -45,49 +45,45 @@ class Game
     puts "attaquer un joueur en vue :"
     i = 0
     while i < @enemies.length
-      if enemies.life_points > 0
-        print "#{i} - "
-        @enemies[i].show_state
-      end
+      print "#{@enemies[i].name} = "
+      print "#{@enemies[i].show_state}"
       i += 1
     end
   end
 
   def menu_choice(str)
-    puts "Alors??"
+    puts "Faites votre choix :"
+    print "> "
     str = gets.chomp
     puts "-------------------------------------------------"
     if str == "a"
-      @human_player.search.weapon
+      @human_player.search_weapon
     end
-
     if str == "s"
       @human_player.search_health_pack
     end
     #si str != a ou s--> recup the spot of the enemy to kill
-    if str == "0" || str == "1" || srt == "2" || str == "3"
+    if str == "0" || str == "1" || str == "2" || str == "3"
       spot = str.to_i
       if spot <= @enemies.count - 1 #ennemi to be killed aka off the array
-        if @enemies[spot].life_points > 0
-          @human_player.attack(enemies[spot])
+      @human_player.attack(enemies[spot])
+        if @enemies[spot].life_points <= 0
           kill_player
         end
-      else
-        puts "Mauvais cheval, tant pis pout toi!"
       end
-    else
-      puts "Erreur de saisie: a ou s ou un chiffre de 0 a 3..."
     end
   end
 
   def enemies_attack
     #each enemy will attack human one after the other
     puts "-------------------------------------------------"
-    puts "Vous vous faites attaquer!!!"
+    puts "Les autres joueurs t'attaquent!"
     i = 0
     while i < @enemies.length
-      if i.life_points > 0
-        i.attack(@human_player)
+      if @enemies[i].life_points > 0
+        @enemies[i].attack(@human_player)
+      else
+        kill_player(@enemies[i])
       end
       i += 1
     end
@@ -95,50 +91,11 @@ class Game
   
   def end
     puts "-------------------------------------------------"
-    puts "*_*  La partie est finie!  *_*"
     if @human_player.life_points > 0
-      puts "BRAVO! TU AS GAGNE!"
+      puts "x_x  BRAVO! TU AS GAGNE!  x_x"
     else
-      puts "LOSER! TU AS PERDU!"
+      puts "---  LOSER! TU AS PERDU!  ---"
     end
     puts "-------------------------------------------------"
   end
-
-
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
