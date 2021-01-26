@@ -29,6 +29,3 @@ while player1.life_points > 0 && player2.life_points > 0
   puts
   i += 1
 end
-
-
-binding.pry
