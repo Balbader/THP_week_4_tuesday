@@ -14,7 +14,7 @@ while player1.life_points > 0 && player2.life_points > 0
   player1.show_state
   player2.show_state
   puts
-  puts "***********************************"
+  puts "-----------------------------------------"
   puts
   puts "Passons a la phase d'attaque numéro #{i}:"
   
