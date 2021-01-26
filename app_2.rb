@@ -82,9 +82,7 @@ while human.life_points > 0 && (enn_1.life_points > 0 || enn_2.life_points > 0)
     end
     i += 1
   end
-
 end
-
 puts "-------------------------------------------------"
 puts
 if human.life_points > 0
