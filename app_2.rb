@@ -86,7 +86,7 @@ while human.life_points > 0 && (enn_1.life_points > 0 || enn_2.life_points > 0)
 end
 
 puts "-------------------------------------------------"
-puts "xxx La partie est finie xxx"
+puts
 if human.life_points > 0
   puts "x_x BRAVO! TU AS GAGNE! x_x"
 else
