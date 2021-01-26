@@ -5,9 +5,8 @@ class Player
   attr_accessor :name, :life_points
 
   def initialize(name)
-    life_points = 10
     @name = name
-    @life_points = life_points
+    @life_points = 10
   end
 
   def show_state
@@ -35,54 +34,55 @@ class Player
   def attack(player)
     puts "Le joueur #{@name} attaque le joueur #{player.name}" 
     nb = compute_damage
-    puts "Le joueur #{@name} a infligé #{nb} de damages au joueur #{player.name}"
     player.gets_damage(nb)
+    puts "Le joueur #{@name} a infligé #{nb} de damages au joueur #{player.name}"
   end
 
 end
 
 class HumanPlayer < Player
   attr_accessor :weapon_level
+  attr_accessor :life_points
 
   def initializer(name)
     @weapon_level = 1
-
-    super
     @life_points = 100
+    super(name)
   end
 
   def show_state
-    puts "#{@name} a #{@life_points} points de vie et une arme de niveau #{@weapon_level}"
+    puts "#{@name} a #{@life_points.to_i} points de vie et une arme de niveau #{@weapon_level.to_i}"
   end
 
   def compute_damage
-    rand(1..6) * @weapon_level
+    return rand(1..6) * @weapon_level.to_i
   end
 
   def search_weapon
-    weapon_level = rand(1..6)
-    puts "Tu as trouvé une arme de niveau #{weapon_level}"
-    if weapon_level > @weapon_level
-      @weapon_level = weapon_level
+    weapon_rand = rand(1..6)
+    puts "Tu as trouvé une arme de niveau #{weapon_rand}"
+    if weapon_rand > @weapon_level.to_i
       puts"Youhou! elle est meilleure que ton arme actuelle: tu la prends."
+      return @weapon_level = weapon_rand
     else
       puts "M@*$... elle n'est pas mieux que ton arme actuelle..."
+      return @weapon_level
     end
   end
 
-  def search_healllth_pack
-    life_points = rand(1..6)
-    if life_points == 1
+  def search_health_pack
+    points = rand(1..6)
+    if points == 1
       puts "Tu n'as rien trouvé..."
     end
-    if (life_points > 1) && (life_points < 6)
+    if (points > 1) && (points < 6)
       puts "Bravo tu as trouvé un pack de +50 points de vie!"
       @life_points = @life_points + 50
       if @life_points > 100
         @life_points = 100
       end
     end
-    if life_points == 6
+    if points == 6
       puts "Waow, tu as trouvé un pack de +80 points de vie !"
       @life_points = @life_points + 80
       if @life_points > 100
