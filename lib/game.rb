@@ -24,7 +24,7 @@ class Game
     i = 0
     while i < @enemies.length
       if i.life_points <= 0
-        @enemies.delete(i)
+        @enemies[i].delete
       end
       i += 1
     end

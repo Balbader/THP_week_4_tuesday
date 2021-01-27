@@ -27,14 +27,20 @@ enn_1 = Player.new("Josiane")
 enn_2 = Player.new("José")
 ennemies << enn_1
 ennemies << enn_2
+round = 1
 
 #------  Initiate battle  ------#
 while human.life_points > 0 && (enn_1.life_points > 0 || enn_2.life_points > 0)
   #afficher status joueur
   human.show_state
 
+  puts
+  puts
+  puts "===================  ROUND #{round.to_s}  ==================="
+  puts
+  puts
+
   #afficher Menu
-  puts "-------------------------------------------------"
   puts "Quelle action veut-tu effectuer?"
   puts
   puts "a - chercher une meilleure arme"
@@ -69,7 +75,6 @@ while human.life_points > 0 && (enn_1.life_points > 0 || enn_2.life_points > 0)
   if choice == "1" && enn_2.life_points > 0
     human.attack(enn_2)
   end
-  puts "-------------------------------------------------"
 
   #ennemies payback
   if enn_1.life_points > 0 && enn_2.life_points > 0
@@ -82,6 +87,7 @@ while human.life_points > 0 && (enn_1.life_points > 0 || enn_2.life_points > 0)
     end
     i += 1
   end
+  round += 1
 end
 puts "-------------------------------------------------"
 puts
