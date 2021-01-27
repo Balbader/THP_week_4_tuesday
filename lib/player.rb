@@ -44,7 +44,7 @@ class HumanPlayer < Player
   attr_accessor :weapon_level
   attr_accessor :life_points
 
-  def initializer(name)
+  def initialize(name)
     super(name)
     @weapon_level = 1
     @life_points = 100
